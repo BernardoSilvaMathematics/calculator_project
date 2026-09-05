@@ -1,0 +1,12 @@
+# Build and binary files
+/build/
+*.o
+*.exe
+*.out
+
+# IDE and system files
+.vscode/
+*.log
+
+
+Doxyfile
