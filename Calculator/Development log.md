@@ -135,3 +135,13 @@ Also allows to access the last answer as ANS
 
 Main
 	Handles the interactive session and orchestrates the calculator’s core components. Creates a single `Evaluator` instance that persists throughout the program’s lifetime, allowing `ANS` to retain its value between expressions. Each iteration reads an input line, tokenizes, parses, evaluates, and prints the result. The program only terminates when the user sends an empty line or EOF (`Ctrl+D` on Linux/macOS, `Ctrl+Z` on Windows). This design transforms the calculator into a REPL (Read–Eval–Print Loop), enabling continuous evaluation without restarting the executable.
+
+
+SMFL Graphing
+	Since it requires **real‑time rendering**, **double buffering**, **event loops**, **coordinate transforms**, **frame‑timing discipline**, and **low‑latency drawing**, SFML provides an ideal environment for managing a render pipeline. With its friendly API and lightweight design, it's a solid choice, balancing between performance and accessibility for this project.
+
+	Implemented as a REPL level command, it would make no sense to have graphing as a standalone function as its a different goal than the normal evaluation function
+
+	Adaptive sampling dynamically adjusts the step size while plotting. Clamping with a minimum and maximum step maintains numerical stability and prevents infinite loops.
+
+	Also manage to zoom in or out, in this regard a clamping is done to avoid extreme zoom ins or zoom outs (theres a button or mouse wheel event that triggers zooming)

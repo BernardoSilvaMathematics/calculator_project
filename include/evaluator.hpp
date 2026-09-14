@@ -113,9 +113,8 @@ class Evaluator {
 public:
     std::unordered_map<std::string, double> variables;
 
-    Evaluator() {
-        variables["ANS"] = 0.0;   // initialize memory
-    }
+    // avoids silent defaults such as ans as 0 (only accessible when they get initialized)
+    Evaluator() {}
 
     double eval(const ASTNode* node) {
         double result = node_eval(node);

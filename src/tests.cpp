@@ -112,14 +112,14 @@ int main() {
     // ------------------------------------------------------------
     {
         Evaluator ev;
-        auto ast1 = Parser(Tokenizer("2+3")).parseExpression();
+        auto ast1 = Parser(Tokenizer("2+3")).parse();
         double r1 = ev.eval(ast1.get());
         if (!approx(ev.variables["ANS"], 5)) {
             std::cerr << "FAILED: ANS after 2+3 should be 5\n";
             std::exit(1);
         }
 
-        auto ast2 = Parser(Tokenizer("ANS * 2")).parseExpression();
+        auto ast2 = Parser(Tokenizer("ANS * 2")).parse();
         double r2 = ev.eval(ast2.get());
         if (!approx(r2, 10)) {
             std::cerr << "FAILED: ANS * 2 should be 10\n";
@@ -131,7 +131,7 @@ int main() {
     {
         Evaluator ev;
         ev.eval(Parser(Tokenizer("10")).parseExpression().get()); // ANS = 10
-        double r = ev.eval(Parser(Tokenizer("sqrt(ANS)")).parseExpression().get());
+        double r = ev.eval(Parser(Tokenizer("sqrt(ANS)")).parse().get());
         if (!approx(r, std::sqrt(10))) {
             std::cerr << "FAILED: sqrt(ANS) incorrect\n";
             std::exit(1);
@@ -141,9 +141,9 @@ int main() {
     // ANS chained
     {
         Evaluator ev;
-        ev.eval(Parser(Tokenizer("5")).parseExpression().get()); // ANS = 5
-        ev.eval(Parser(Tokenizer("ANS + 5")).parseExpression().get()); // ANS = 10
-        double r = ev.eval(Parser(Tokenizer("ANS * ANS")).parseExpression().get());
+        ev.eval(Parser(Tokenizer("5")).parse().get()); // ANS = 5
+        ev.eval(Parser(Tokenizer("ANS + 5")).parse().get()); // ANS = 10
+        double r = ev.eval(Parser(Tokenizer("ANS * ANS")).parse().get());
         if (!approx(r, 100)) {
             std::cerr << "FAILED: ANS * ANS incorrect\n";
             std::exit(1);
